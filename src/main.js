@@ -16,17 +16,18 @@ const loader = document.querySelector('#loader');
 form.addEventListener('submit', async ev => {
   ev.preventDefault();
 
-  const value = form.elements.image.value;
+  const input = form.elements.image;
 
-  if (!value.trim()) return;
+  if (!input.value.trim()) return;
 
   loader.style.display = '';
-  const images = await getImages(value);
+  const images = await getImages(input.value);
 
   //показує загрузку бо не видно(
   // await new Promise(res => setTimeout(() => res(), 2000));
 
   loader.style.display = 'none';
+  input.value = '';
   if (images.length == 0) {
     gallery.innerHTML = '';
     return iziToast.error({
